@@ -63,7 +63,7 @@
               "format": {"type": "topojson", "feature": "SA2"}
             },
             "key": "sa_two", 
-            "fields":["scale", "count", "density"]
+            "fields":["restaurant_density", "count", "area"]
           }
         }
       ],
@@ -79,7 +79,8 @@
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "range": ["#fef0d9", "#fdbb84", "#fc8d59", "#e34a33", "#b30000"]
+              "domain": [0.1, 0.5, 1, 3, 9],
+            "range": ["#fde725", "#7ad151", "#22a884", "#2a788e", "#414487", "#440154"]
           },
           "legend": {
             "title": "Restaurant Density",
@@ -96,8 +97,8 @@
         "tooltip": [
           {"field": "properties.sa2_name_2021", "type": "nominal", "title": "Area Name"},
           {"field": "count", "type": "quantitative", "title": "Number of Restaurants"},
-          {"field": "density", "type": "quantitative", "title": "Population Density (per sq km)"},
-          {"field": "scale", "type": "quantitative", "title": "Restaurant Density ", "format": ".1f"}
+          {"field": "area", "type": "quantitative", "title": "Area (sq km)"},
+          {"field": "restaurant_density", "type": "quantitative", "title": "Restaurant Density", "format": ".2f"}
         ]
       }
     }
