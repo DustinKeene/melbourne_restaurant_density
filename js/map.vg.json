@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "",
+    "align": "center",
+    "font": "Segoe UI, system-ui, sans-serif",
+    "fontSize": 18,
+    "offset": 20
+  },
+  
+  "width": 660,
+  "height": 565,
+  "padding": {"top": 20},
+  "projection": {"type": "mercator"},
+  "config": {
+    "background": "transparent"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/Data/final_data_recorded_resto.csv",
+    "format": {"type": "csv"}
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "calculate": "'Data is not available for ' + datum.Sa_two",
+          "as": "Note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape", 
+        "fill": "lightgray", 
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "Note", "type": "nominal", "title": "Note"}
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/Data/SA2.json",
+        "format": {"type": "topojson", "feature": "SA2"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null, 
+        "stroke": "lightgray", 
+        "strokeWidth": 0.1
+      }
+    },
+    
+    {
+      "transform": [
+        {
+          "lookup": "properties.sa2_name_2021",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/DustinKeene/FIT3179/refs/heads/main/Homework%20Week%209/js/ne_50m.json",
+              "format": {"type": "topojson", "feature": "SA2"}
+            },
+            "key": "sa_two", 
+            "fields":["scale", "count", "density"]
+          }
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white", 
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "scale",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "range": ["#fef0d9", "#fdbb84", "#fc8d59", "#e34a33", "#b30000"]
+          },
+          "legend": {
+            "title": "Restaurant Density",
+            "offset":80,
+            "titleLimit": 300,
+            "titleFontSize": 10,
+            "padding":5,
+            "labelLimit": 300,
+            "titleAlign": "left",
+            "orient": "bottom-left",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.sa2_name_2021", "type": "nominal", "title": "Area Name"},
+          {"field": "count", "type": "quantitative", "title": "Number of Restaurants"},
+          {"field": "density", "type": "quantitative", "title": "Population Density (per sq km)"},
+          {"field": "scale", "type": "quantitative", "title": "Restaurant Density ", "format": ".1f"}
+        ]
+      }
+    }
+  ]
+  
+}
