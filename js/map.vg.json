@@ -1,107 +1,88 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "",
+    "text": "Melbourne Restaurant Density (2019-2023)",
     "align": "center",
     "font": "Segoe UI, system-ui, sans-serif",
     "fontSize": 18,
     "offset": 20
   },
-  
   "width": 660,
-  "height": 565,
+  "height": 605,
   "padding": {"top": 20},
   "projection": {"type": "mercator"},
-  "config": {
-    "background": "transparent"
-  },
+  "config": {"background": "transparent"},
+  
   "data": {
-    "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/Data/final_data_recorded_resto.csv",
-    "format": {"type": "csv"}
+    "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/js/SA2.json",
+    "format": {"type": "topojson", "feature": "SA2"}
   },
+  
   "layer": [
     {
-      "transform": [
-        {
-          "calculate": "'Data is not available for ' + datum.Sa_two",
-          "as": "Note"
-        }
-      ],
       "mark": {
-        "type": "geoshape", 
-        "fill": "lightgray", 
-        "stroke": "white",
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "lightgray",
         "strokeWidth": 0.5
       },
       "encoding": {
         "tooltip": [
-          {"field": "Note", "type": "nominal", "title": "Note"}
+          {"field": "properties.sa2_name_2021", "type": "nominal", "title": "Area"}
         ]
       }
     },
-
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/Data/SA2.json",
-        "format": {"type": "topojson", "feature": "SA2"}
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": null, 
-        "stroke": "lightgray", 
-        "strokeWidth": 0.1
-      }
-    },
-    
     {
       "transform": [
         {
           "lookup": "properties.sa2_name_2021",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/DustinKeene/FIT3179/refs/heads/main/Homework%20Week%209/js/ne_50m.json",
-              "format": {"type": "topojson", "feature": "SA2"}
+              "url": "https://raw.githubusercontent.com/DustinKeene/melbourne_restaurant_density/refs/heads/main/Data/final_data_recorded_resto.csv",
+              "format": {"type": "csv"}
             },
-            "key": "sa_two", 
-            "fields":["restaurant_density", "count", "area"]
+            "key": "sa_two",
+            "fields": ["restaurant_density", "count", "area"]
           }
+        },
+        {
+          "filter": "datum.restaurant_density != null"
         }
       ],
-
       "mark": {
         "type": "geoshape",
-        "stroke": "white", 
+        "stroke": "black",
         "strokeWidth": 0.5
       },
       "encoding": {
         "color": {
-          "field": "scale",
+          "field": "restaurant_density",
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-              "domain": [0.1, 0.5, 1, 3, 9],
-            "range": ["#fde725", "#7ad151", "#22a884", "#2a788e", "#414487", "#440154"]
+            "domain": [0.1, 0.5, 1, 3, 9],
+            "range": ["#fff5eb", "#fee6ce", "#fdbe85", "#fd8d3c", "#e6550d", "#a63603"]
+
           },
           "legend": {
-            "title": "Restaurant Density",
-            "offset":80,
+            "title": "Restaurants per km²",
+            "offset": 20,
             "titleLimit": 300,
             "titleFontSize": 10,
-            "padding":5,
+            "padding": 5,
             "labelLimit": 300,
             "titleAlign": "left",
-            "orient": "bottom-left",
-            "direction": "horizontal"
+            "orient": "top-right",
+            "direction": "vertical"
           }
         },
         "tooltip": [
-          {"field": "properties.sa2_name_2021", "type": "nominal", "title": "Area Name"},
-          {"field": "count", "type": "quantitative", "title": "Number of Restaurants"},
-          {"field": "area", "type": "quantitative", "title": "Area (sq km)"},
-          {"field": "restaurant_density", "type": "quantitative", "title": "Restaurant Density", "format": ".2f"}
+          {"field": "properties.sa2_name_2021", "type": "nominal", "title": "Area"},
+          {"field": "count", "type": "quantitative", "title": "Restaurant Count"},
+          {"field": "area", "type": "quantitative", "title": "Area (km²)", "format": ".2f"},
+          {"field": "restaurant_density", "type": "quantitative", "title": "Density", "format": ".2f"}
         ]
       }
     }
   ]
-  
 }
