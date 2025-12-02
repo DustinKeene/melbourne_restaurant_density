@@ -1,17 +1,17 @@
-sa_two,count,density,area,scale
-Carlton,413,13171,1.819,3.136
-Docklands,387,7597,2.444,5.094
-East Melbourne,71,1801,2.9,3.942
-Kensington (Vic.),66,5449,2.147,1.211
-Melbourne CBD - East,488,17079,0.802,2.857
-Melbourne CBD - North,1199,41985,0.5616,2.856
-Melbourne CBD - West,612,21419,1.005,2.857
-North Melbourne,170,7927,2.425,2.145
-Parkville,83,2046,4.049,4.057
-Port Melbourne,30,6053,2.789,0.496
-South Yarra - North,8,11656,1.170,0.069
-South Yarra - South,6,7835,1.347,0.077
-South Yarra - West,13,4622,1.503,0.281
-Southbank (West) - South Wharf,66,"9,258",0.8496,0.713
-Southbank - East,173,"24,164",0.804,0.716
-West Melbourne - Residential,99,11278,0.8247,0.878
+sa_two,count,density,area,population,restaurant_density
+Carlton,413,13171,1.819,23954,2.28
+Docklands,387,7597,2.444,18567,1.59
+East Melbourne,71,1801,2.9,5222,0.25
+Kensington (Vic.),66,5449,2.147,11699,0.31
+Melbourne CBD - East,687,17079,0.802,19221,8.57
+Melbourne CBD - North,843,41985,0.5616,23579,15.02
+Melbourne CBD - West,770,21419,1.005,21528,7.67
+North Melbourne,170,7927,2.425,19221,0.71
+Parkville,83,2046,4.049,8293,0.21
+Port Melbourne,30,6053,2.789,16884,0.11
+South Yarra - North,8,11656,1.17,13633,0.07
+South Yarra - South,7,7835,1.347,10558,0.06
+South Yarra - West,13,4622,1.503,6946,0.09
+Southbank (West) - South Wharf,69,9258,0.8496,7866,0.82
+Southbank - East,170,24164,0.804,19428,2.12
+West Melbourne - Residential,99,11278,0.8247,9301,1.21
