@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "Melbourne Restaurant Density (2019-2023)",
+    "text": "Melbourne City Restaurant Density (2019-2023)",
     "align": "center",
     "font": "Segoe UI, system-ui, sans-serif",
     "fontSize": 18,
